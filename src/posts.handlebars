@@ -1,0 +1,33 @@
+{{#each posts}}
+  <div class='post card mb-3'>
+    <div class='card-body'>
+      <h2 class='card-title'>{{title}}</h2>
+      <p class='card-text'>{{body}}</p>
+      <button
+        class='btn btn-warning editPostButton'
+        data-id='{{id}}'
+      >Редагувати</button>
+      <button
+        class='btn btn-danger deletePostButton'
+        data-id='{{id}}'
+      >Видалити</button>
+    </div>
+    <div class='commentsContainer card-footer' data-id='{{id}}'>
+      <h3 class='h5'>Коментарі:</h3>
+      <ul class='list-group mb-2'>
+        {{#each comments}}
+          <li class='list-group-item'>{{this}}</li>
+        {{/each}}
+      </ul>
+      <form class='createCommentForm d-flex'>
+        <input
+          type='text'
+          class='form-control commentInput me-2'
+          placeholder='Новий коментар'
+          required
+        />
+        <button type='submit' class='btn btn-success'>Додати коментар</button>
+      </form>
+    </div>
+  </div>
+{{/each}}

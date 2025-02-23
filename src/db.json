@@ -1,0 +1,27 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Hello World",
+      "body": "to print hello world you use console.log(`Hello World`)",
+      "comments": [
+        "hello",
+        "how are you"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Another post",
+      "body": "to print hello world you use console.log(`Hello World`)",
+      "comments": [
+        "hello",
+        "how are you"
+      ]
+    },
+    {
+      "id": "f3d5",
+      "title": "How to be good at web develpment",
+      "body": "Idk "
+    }
+  ]
+}

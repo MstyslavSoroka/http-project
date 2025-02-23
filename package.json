@@ -1,27 +1,36 @@
 {
   "name": "http-project",
   "version": "2.0.0",
-  "description": "",
+  "description": "Цей проект створено за допомогою Parcel. Для ознайомлення та налаштування \r додаткових можливостей, [зверніться до документації](https://parceljs.org/).",
   "homepage": "https://MstyslavSoroka.github.io/http-project",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /http-project/"
+    "build": "parcel build src/*.html --public-url /http-project/",
+    "server": "npx json-server src/db.json"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:MstyslavSoroka/http-project.git"
+    "url": "git+ssh://git@github.com/MstyslavSoroka/http-project.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "json-server": "^1.0.0-beta.3",
     "modern-normalize": "^1.1.0"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
-    "parcel": "^2.6.0",
+    "handlebars": "^4.7.8",
+    "parcel": "^2.13.3",
+    "parcel-plugin-handlebars": "^0.4.4",
     "parcel-reporter-clean-dist": "^1.0.4",
+    "parcel-transformer-handlebars": "^1.0.0",
+    "parcel-transformer-hbs": "^1.0.4",
     "posthtml-include": "^1.7.4"
   },
-  "browserslist": "> 0.5%, last 2 versions, not dead"
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "bugs": {
+    "url": "https://github.com/MstyslavSoroka/http-project/issues"
+  }
 }
