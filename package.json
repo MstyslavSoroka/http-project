@@ -16,6 +16,7 @@
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "hystmodal": "^1.0.1",
     "json-server": "^1.0.0-beta.3",
     "modern-normalize": "^1.1.0"
   },

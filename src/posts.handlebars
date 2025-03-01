@@ -6,13 +6,64 @@
       <button
         class='btn btn-warning editPostButton'
         data-id='{{id}}'
+        data-bs-toggle='modal'
+        data-bs-target='#exampleModal'
       >Редагувати</button>
+      <div
+        class='modal fade'
+        id='exampleModal'
+        tabindex='-1'
+        aria-labelledby='exampleModalLabel'
+        aria-hidden='true'
+      >
+        <div class='modal-dialog'>
+          <div class='modal-content'>
+            <div class='modal-header'>
+              <h1 class='modal-title fs-5' id='exampleModalLabel'>Edit post</h1>
+              <button
+                type='button'
+                class='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              ></button>
+            </div>
+            <div class='modal-body'>
+              <form>
+                <label for='title'>title:</label>
+                <input
+                  id='title'
+                  type='text'
+                  placeholder='Name'
+                  value='{{title}}'
+                  data-id='{{id}}'
+                />
+                <label for='main'>Main text:</label>
+                <input
+                  id='main'
+                  type='text'
+                  placeholder='Name'
+                  value='{{body}}'
+                  data-id='{{id}}'
+                />
+              </form>
+            </div>
+            <div class='modal-footer'>
+              <button
+                type='button'
+                class='btn btn-secondary'
+                data-bs-dismiss='modal'
+              >Close</button>
+              <button type='button' class='btn btn-primary'>Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <button
         class='btn btn-danger deletePostButton'
         data-id='{{id}}'
       >Видалити</button>
     </div>
-    <div class='commentsContainer card-footer' data-id='{{id}}'>
+    <div class='commentsContainer card-footer' id='{{id}}' data-id='{{id}}'>
       <h3 class='h5'>Коментарі:</h3>
       <ul class='list-group mb-2'>
         {{#each comments}}
@@ -21,12 +72,14 @@
       </ul>
       <form class='createCommentForm d-flex'>
         <input
+          data-id='{{id}}'
           type='text'
           class='form-control commentInput me-2'
           placeholder='Новий коментар'
           required
         />
-        <button type='submit' class='btn btn-success'>Додати коментар</button>
+        <button type='button' data-id='{{id}}' class='btn btn-success'>Додати
+          коментар</button>
       </form>
     </div>
   </div>

@@ -6,7 +6,8 @@
       "body": "to print hello world you use console.log(`Hello World`)",
       "comments": [
         "hello",
-        "how are you"
+        "how are you",
+        "no"
       ]
     },
     {
@@ -21,7 +22,10 @@
     {
       "id": "f3d5",
       "title": "How to be good at web develpment",
-      "body": "Idk "
+      "body": "Idk ",
+      "comments": [
+        "no"
+      ]
     }
   ]
 }

@@ -22,14 +22,15 @@ async function getPosts() {
 
 getPosts();
 
-// Створення нового поста
+//! Створення нового поста
 
 async function createPost(title, body) {
   try {
+    const comments = [];
     const response = await fetch('http://localhost:3000/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, body }),
+      body: JSON.stringify({ title, body, comments }),
     });
 
     const data = await response.json();
@@ -44,7 +45,7 @@ form.addEventListener('submit', e => {
   createPost(title.value, body.value);
 });
 
-// Оновлення поста
+//! Оновлення поста
 
 async function updatePost(id, title, content) {
   try {
@@ -53,50 +54,56 @@ async function updatePost(id, title, content) {
   }
 }
 
-// Видалення поста
+//! Видалення поста
 
 async function deletePost(id) {
   try {
+    await fetch(`http://localhost:3000/posts/${id}`, {
+      method: 'DELETE',
+    });
   } catch (error) {
     console.error(error);
   }
 }
 
-// Додавання коментаря до поста
+document.addEventListener('DOMContentLoaded', e => {
+  document.querySelectorAll('.deletePostButton').forEach(button => {
+    button.addEventListener('click', e => {
+      const btnId = e.target.dataset.id;
+      deletePost(btnId);
+    });
+  });
+});
+
+//! Додавання коментаря до поста
 
 async function createComment(postId, comment) {
   try {
+    const postResponse = await fetch(`http://localhost:3000/posts/${postId}`);
+    const post = await postResponse.json();
+    const updatedComments = [...post.comments, comment];
+    const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comments: updatedComments }),
+    });
+
+    return await response.json();
   } catch (error) {
-    console.error(error);
+    console.error('Error creating comment:', error);
   }
 }
 
-// Оновлення відображення постів на сторінці
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-success').forEach(button => {
+    button.addEventListener('click', e => {
+      const formId = e.target.dataset.id;
+      const form = e.target.closest('.createCommentForm');
+      const inputValue = form.querySelector('input').value;
 
-function renderPosts(posts) {}
-
-// Обробник події для створення поста
-
-// document.getElementById('createPostForm').addEventListener('submit', cb);
-
-// // Обробник події для редагування поста
-
-// document.addEventListener('click', cb);
-
-// // Обробник події для видалення поста
-
-// document.addEventListener('click', cb);
-
-// // Обробник події для додавання коментаря
-
-// document.addEventListener('submit', cb);
-
-// // Запуск додатку
-
-// async function startApp() {
-//   const posts = await getPosts();
-
-//   renderPosts(posts);
-// }
-
-// startApp();
+      createComment(formId, inputValue);
+      console.log(`Button clicked for form with data-id: ${formId}`);
+      console.log('Input value:', inputValue);
+    });
+  });
+});
