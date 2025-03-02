@@ -47,12 +47,40 @@ form.addEventListener('submit', e => {
 
 //! Оновлення поста
 
-async function updatePost(id, title, content) {
+async function updatePost(id, newTitle, NewContent) {
   try {
+    const postResponse = await fetch(`http://localhost:3000/posts/${id}`);
+    const post = await postResponse.json();
+    const comments = [...post.comments];
+    const response = await fetch(`http://localhost:3000/posts/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: newTitle,
+        body: NewContent,
+        comments: comments,
+      }),
+    });
+    return await response.json();
   } catch (error) {
     console.error(error);
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.save-btn').forEach(button => {
+    button.addEventListener('click', e => {
+      const btnId = e.currentTarget.dataset.id;
+      const form = e.target.closest('.change-form');
+      const titleInput = form.querySelector('#title-input');
+      const contentInput = form.querySelector('#main-input');
+      const title = titleInput.value;
+      const content = contentInput.value;
+
+      updatePost(btnId, title, content);
+    });
+  });
+});
 
 //! Видалення поста
 
